@@ -1,4 +1,4 @@
-package discord.bots.DonnieThornberry;
+package discord.bots.annoy.bot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

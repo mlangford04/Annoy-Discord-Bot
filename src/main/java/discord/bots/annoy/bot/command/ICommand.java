@@ -1,4 +1,4 @@
-package discord.bots.DonnieThornberry.command;
+package discord.bots.annoy.bot.command;
 
 public interface ICommand {
   void handle(CommandContext ctx);

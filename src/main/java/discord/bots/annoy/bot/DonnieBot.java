@@ -1,4 +1,4 @@
-package discord.bots.DonnieThornberry;
+package discord.bots.annoy.bot;
 
 import java.util.EnumSet;
 import javax.security.auth.login.LoginException;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class DonnieBot {
 
   public DonnieBot () throws LoginException {
+    //TODO: hide token
     JDABuilder.createDefault(
         "OTcyNTczOTIyODQ5NTk1NDYy.GqrHeu.9XVO5skXme3gnmgWSoBD2LCkZ9owibvfcjLMr4",
         GatewayIntent.GUILD_MEMBERS,

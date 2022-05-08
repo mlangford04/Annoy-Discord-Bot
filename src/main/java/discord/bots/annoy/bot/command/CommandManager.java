@@ -1,7 +1,6 @@
-package discord.bots.DonnieThornberry.command;
+package discord.bots.annoy.bot.command;
 
-import discord.bots.DonnieThornberry.EventListener;
-import discord.bots.DonnieThornberry.command.commands.AnnoyCommand;
+import discord.bots.annoy.bot.command.commands.AnnoyCommand;
 import java.util.ArrayList;
 import java.util.List;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -44,7 +43,7 @@ public class CommandManager {
   public void handle(MessageReceivedEvent event, String content) {
     //TODO: handle event with arguments
     if(content.startsWith("!"))
-      content = content.substring(1,content.length());
+      content = content.substring(1);
     ICommand cmd = this.getCommand(content);
 
     if (cmd != null) {

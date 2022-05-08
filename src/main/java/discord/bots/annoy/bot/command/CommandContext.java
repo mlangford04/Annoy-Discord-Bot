@@ -1,4 +1,4 @@
-package discord.bots.DonnieThornberry.command;
+package discord.bots.annoy.bot.command;
 
 import java.util.List;
 import net.dv8tion.jda.api.entities.Guild;
