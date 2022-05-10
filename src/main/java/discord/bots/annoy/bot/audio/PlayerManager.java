@@ -38,6 +38,28 @@ public class PlayerManager {
         });
     }
 
+    public void load(GuildMusicManager musicManager, String trackUrl) {
+        this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
+            @Override
+            public void trackLoaded(AudioTrack track) {
+                musicManager.getScheduler().queue(track);
+            }
+
+            @Override
+            public void playlistLoaded(AudioPlaylist playlist) {
+                //
+            }
+            @Override
+            public void noMatches() {
+                //
+            }
+            @Override
+            public void loadFailed(FriendlyException exception) {
+                //
+            }
+        });
+    }
+
     public void loadAndPlay(TextChannel channel, String trackUrl) {
         final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
 
