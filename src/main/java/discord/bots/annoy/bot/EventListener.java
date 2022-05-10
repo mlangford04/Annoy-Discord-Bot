@@ -19,7 +19,7 @@ public class EventListener extends ListenerAdapter {
       Message message = event.getMessage();
       User author = message.getAuthor();
       String content = message.getContentRaw();
-      Guild guild = event.getGuild();
+      //Guild guild = event.getGuild();
 
       // Ignore message if bot
       if (author.isBot())

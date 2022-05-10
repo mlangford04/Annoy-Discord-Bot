@@ -1,11 +1,8 @@
 package discord.bots.annoy.bot.command.commands;
 
 import discord.bots.annoy.bot.audio.handler.AudioReceiveHandlerImpl;
-import discord.bots.annoy.bot.audio.listener.ConnectionListenerImpl;
 import discord.bots.annoy.bot.command.CommandContext;
 import discord.bots.annoy.bot.command.ICommand;
-import net.dv8tion.jda.api.audio.AudioReceiveHandler;
-import net.dv8tion.jda.api.audio.hooks.ConnectionListener;
 import net.dv8tion.jda.api.entities.AudioChannel;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
@@ -13,7 +10,6 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 public class AnnoyCommand implements ICommand {
-  private final ConnectionListener connectionListener = new ConnectionListenerImpl();
 
   @Override
   public void handle(CommandContext ctx) {
@@ -44,7 +40,7 @@ public class AnnoyCommand implements ICommand {
     final AudioChannel memberChannel = memberVoiceState.getChannel();
 
     //audioManager.setConnectionListener(new ConnectionListenerImpl());
-    audioManager.setReceivingHandler(new AudioReceiveHandlerImpl());
+    audioManager.setReceivingHandler(new AudioReceiveHandlerImpl(ctx));
     audioManager.openAudioConnection(memberChannel);
 
     channel.sendMessageFormat("Connecting to `\uD83D\uDD0A %s`", memberChannel.getName()).queue();
