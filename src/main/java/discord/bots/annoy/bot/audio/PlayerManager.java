@@ -17,7 +17,7 @@ import java.util.Map;
 public class PlayerManager {
     private static  PlayerManager INSTANCE;
 
-    private final Map<Long, GuildMusicManager> musicManagers;
+    private final Map<Long, GuildAudioManager> musicManagers;
     private final AudioPlayerManager audioPlayerManager;
 
     public PlayerManager() {
@@ -28,68 +28,28 @@ public class PlayerManager {
         AudioSourceManagers.registerLocalSource(this.audioPlayerManager);
     }
 
-    public GuildMusicManager getMusicManager(Guild guild) {
+    public GuildAudioManager getMusicManager(Guild guild) {
         return this.musicManagers.computeIfAbsent(guild.getIdLong(), (guildId) -> {
-            final GuildMusicManager guildMusicManager = new GuildMusicManager(this.audioPlayerManager);
+            final GuildAudioManager guildAudioManager = new GuildAudioManager(this.audioPlayerManager);
 
-            guild.getAudioManager().setSendingHandler(guildMusicManager.getSendHandler());
+            guild.getAudioManager().setSendingHandler(guildAudioManager.getSendHandler());
 
-            return guildMusicManager;
-        });
-    }
-
-    public void load(GuildMusicManager musicManager, String trackUrl) {
-        this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
-            @Override
-            public void trackLoaded(AudioTrack track) {
-                musicManager.getScheduler().queue(track);
-            }
-
-            @Override
-            public void playlistLoaded(AudioPlaylist playlist) {
-                //
-            }
-            @Override
-            public void noMatches() {
-                //
-            }
-            @Override
-            public void loadFailed(FriendlyException exception) {
-                //
-            }
+            return guildAudioManager;
         });
     }
 
     public void loadAndPlay(TextChannel channel, String trackUrl) {
-        final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
+        final GuildAudioManager musicManager = this.getMusicManager(channel.getGuild());
 
         this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
                 musicManager.getScheduler().queue(track);
-
-                channel.sendMessage("Adding to queue: `")
-                        .append(track.getInfo().title)
-                        .append("` by `")
-                        .append(track.getInfo().author)
-                        .append('`')
-                        .queue();
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                final List<AudioTrack> tracks = playlist.getTracks();
-
-                channel.sendMessage("Adding to queue: `")
-                        .append(String.valueOf(tracks.size()))
-                        .append("` tracks from playlist `")
-                        .append(playlist.getName())
-                        .append('`')
-                        .queue();
-
-                for (final AudioTrack track : tracks) {
-                    musicManager.getScheduler().queue(track);
-                }
+                //
             }
 
             @Override

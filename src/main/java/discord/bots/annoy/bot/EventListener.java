@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EventListener extends ListenerAdapter {
-  private static final Logger LOGGER = LoggerFactory.getLogger(EventListener.class);
   private final CommandManager commandManager = new CommandManager();
 
   @Override
@@ -19,7 +18,6 @@ public class EventListener extends ListenerAdapter {
       Message message = event.getMessage();
       User author = message.getAuthor();
       String content = message.getContentRaw();
-      //Guild guild = event.getGuild();
 
       // Ignore message if bot
       if (author.isBot())

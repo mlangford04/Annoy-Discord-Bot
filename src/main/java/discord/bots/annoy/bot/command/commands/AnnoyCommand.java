@@ -13,19 +13,13 @@ public class AnnoyCommand implements ICommand {
 
   @Override
   public void handle(CommandContext ctx) {
-      if(joinChannel(ctx)) {
-        //annoySpeakers(ctx);
-      }
-  }
-
-  private boolean joinChannel(CommandContext ctx) {
     final TextChannel channel = ctx.getTextChannel();
     final Member self = ctx.getSelfMember();
     final GuildVoiceState selfVoiceState = self.getVoiceState();
 
     if (selfVoiceState.inAudioChannel()) {
       channel.sendMessage("I'm already in an audio channel").queue();
-      return false;
+      return;
     }
 
     final Member member = ctx.getMember();
@@ -33,19 +27,16 @@ public class AnnoyCommand implements ICommand {
 
     if (!memberVoiceState.inAudioChannel()) {
       channel.sendMessage("You need to be in an audio channel for this command to work").queue();
-      return false;
+      return;
     }
 
     final AudioManager audioManager = ctx.getGuild().getAudioManager();
     final AudioChannel memberChannel = memberVoiceState.getChannel();
 
-    //audioManager.setConnectionListener(new ConnectionListenerImpl());
     audioManager.setReceivingHandler(new AudioReceiveHandlerImpl(ctx));
     audioManager.openAudioConnection(memberChannel);
 
     channel.sendMessageFormat("Connecting to `\uD83D\uDD0A %s`", memberChannel.getName()).queue();
-
-    return true;
   }
 
   @Override

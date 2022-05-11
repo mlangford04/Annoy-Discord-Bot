@@ -2,6 +2,7 @@ package discord.bots.annoy.bot.command;
 
 import discord.bots.annoy.bot.command.commands.AnnoyCommand;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
@@ -42,18 +43,23 @@ public class CommandManager {
 
   public void handle(MessageReceivedEvent event, String content) {
     //TODO: handle event with arguments
-    if(content.startsWith("!"))
-      content = content.substring(1);
-    ICommand cmd = this.getCommand(content);
+    if(content.startsWith("!")) {
+      String[] split = content.split(" ", 2);
 
-    if (cmd != null) {
-      event.getChannel().sendTyping().queue();
-      List<String> args = null;
+      String command = split[0].substring(1);
+      ICommand cmd = this.getCommand(command);
 
-      LOGGER.info("Recieved '"+content+"' command from Discord.");
-      CommandContext ctx = new CommandContext(event, args);
+      if (cmd != null) {
+        //String[] arguments = split[1].split(",");
+        List<String> args = split.length > 1 ? Arrays.asList(split[1].split(",")) : null;
 
-      cmd.handle(ctx);
+        event.getChannel().sendTyping().queue();
+        LOGGER.info("Received '"+command+"' command from Discord.");
+        CommandContext ctx = new CommandContext(event, args);
+
+        cmd.handle(ctx);
+      }
     }
+
   }
 }

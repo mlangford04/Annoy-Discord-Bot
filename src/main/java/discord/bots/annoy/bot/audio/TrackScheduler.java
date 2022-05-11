@@ -18,9 +18,6 @@ public class TrackScheduler extends AudioEventAdapter {
     public TrackScheduler(AudioPlayer player) {
         this.player = player;
         this.queue = new LinkedBlockingQueue<>();
-
-        player.provide();
-        player.setPaused(true);
     }
 
     public void queue(AudioTrack track) {
