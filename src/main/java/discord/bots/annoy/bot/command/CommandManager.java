@@ -4,6 +4,8 @@ import discord.bots.annoy.bot.command.commands.AnnoyCommand;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import discord.bots.annoy.bot.command.commands.StopCommand;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,9 @@ public class CommandManager {
   private final List<ICommand> commands = new ArrayList<>();
   private static final Logger LOGGER = LoggerFactory.getLogger(CommandManager.class);
 
-
   public CommandManager() {
     addCommand(new AnnoyCommand());
+    addCommand(new StopCommand());
   }
 
   private void addCommand(ICommand command) {
@@ -42,7 +44,6 @@ public class CommandManager {
   }
 
   public void handle(MessageReceivedEvent event, String content) {
-    //TODO: handle event with arguments
     if(content.startsWith("!")) {
       String[] split = content.split(" ", 2);
 
@@ -50,7 +51,6 @@ public class CommandManager {
       ICommand cmd = this.getCommand(command);
 
       if (cmd != null) {
-        //String[] arguments = split[1].split(",");
         List<String> args = split.length > 1 ? Arrays.asList(split[1].split(",")) : null;
 
         event.getChannel().sendTyping().queue();
@@ -60,6 +60,5 @@ public class CommandManager {
         cmd.handle(ctx);
       }
     }
-
   }
 }

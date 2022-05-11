@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.managers.AudioManager;
 
 public class AnnoyCommand implements ICommand {
 
+  //TODO: Allow for more commands to add and remove names
   @Override
   public void handle(CommandContext ctx) {
     final TextChannel channel = ctx.getTextChannel();

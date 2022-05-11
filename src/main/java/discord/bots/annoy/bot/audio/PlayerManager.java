@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PlayerManager {
@@ -28,7 +27,7 @@ public class PlayerManager {
         AudioSourceManagers.registerLocalSource(this.audioPlayerManager);
     }
 
-    public GuildAudioManager getMusicManager(Guild guild) {
+    public GuildAudioManager getAudioManager(Guild guild) {
         return this.musicManagers.computeIfAbsent(guild.getIdLong(), (guildId) -> {
             final GuildAudioManager guildAudioManager = new GuildAudioManager(this.audioPlayerManager);
 
@@ -39,7 +38,7 @@ public class PlayerManager {
     }
 
     public void loadAndPlay(TextChannel channel, String trackUrl) {
-        final GuildAudioManager musicManager = this.getMusicManager(channel.getGuild());
+        final GuildAudioManager musicManager = this.getAudioManager(channel.getGuild());
 
         this.audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override

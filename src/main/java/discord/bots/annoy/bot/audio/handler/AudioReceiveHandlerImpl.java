@@ -9,9 +9,6 @@ import net.dv8tion.jda.api.audio.AudioReceiveHandler;
 import net.dv8tion.jda.api.audio.CombinedAudio;
 import net.dv8tion.jda.api.entities.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class AudioReceiveHandlerImpl implements AudioReceiveHandler {
@@ -23,7 +20,7 @@ public class AudioReceiveHandlerImpl implements AudioReceiveHandler {
 
 
   public AudioReceiveHandlerImpl(CommandContext ctx) {
-    this.guildAudioManager = PlayerManager.getInstance().getMusicManager(ctx.getGuild());
+    this.guildAudioManager = PlayerManager.getInstance().getAudioManager(ctx.getGuild());
     this.usersToAnnoy = ctx.getArgs();
     this.callingUser = ctx.getMember().getUser();
 
@@ -36,11 +33,6 @@ public class AudioReceiveHandlerImpl implements AudioReceiveHandler {
 
   public void handleCombinedAudio(@Nonnull CombinedAudio combinedAudio) {
     guildAudioManager.getScheduler().getPlayer().setPaused(shouldPause(combinedAudio.getUsers()));
-//    if(combinedAudio.getUsers().isEmpty()) {
-//      guildAudioManager.getScheduler().getPlayer().setPaused(true);
-//    } else {
-//      guildAudioManager.getScheduler().getPlayer().setPaused(false);
-//    }
   }
 
   private boolean shouldPause(List<User> usersSpeaking) {
@@ -58,14 +50,6 @@ public class AudioReceiveHandlerImpl implements AudioReceiveHandler {
 
     //Args given --> Only annoy users given
     return !usersSpeaking.stream().anyMatch(userSpeaking -> usersToAnnoy.contains(userSpeaking.getName()));
-
-//    return users.stream()
-//            .distinct()
-//            .map(User::getName)
-//            .anyMatch(
-//                    usersToAnnoy.stream()
-//                            .collect(Collectors.toSet())
-//                    ::contains);
   }
 
 
