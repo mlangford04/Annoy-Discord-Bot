@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 public class DonnieBot {
 
   public DonnieBot () throws LoginException {
-    //TODO: Hide Token
     JDABuilder.createDefault(
-        "OTcyNTczOTIyODQ5NTk1NDYy.GqrHeu.9XVO5skXme3gnmgWSoBD2LCkZ9owibvfcjLMr4",
+        Config.get("BOT_TOKEN"),
         GatewayIntent.GUILD_MEMBERS,
         GatewayIntent.GUILD_MESSAGES,
         GatewayIntent.GUILD_VOICE_STATES
