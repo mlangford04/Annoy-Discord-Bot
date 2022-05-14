@@ -2,7 +2,8 @@
 
 Use to annoy your friends in your discord channel. Donnie will join your voice call at your command and speak over your targeted victims
 
-[![Donnie](https://static.wikia.nocookie.net/wildthornberrys/images/f/f2/Donnie.png/revision/latest?cb=20210821205857)](https://static.wikia.nocookie.net/wildthornberrys/images/f/f2/Donnie.png/revision/latest?cb=20210821205857)
+<img src="https://static.wikia.nocookie.net/wildthornberrys/images/f/f2/Donnie.png/revision/latest?cb=20210821205857" width="50%" height="50%" />
+
 ## Getting Started
 
 ### Dependencies
