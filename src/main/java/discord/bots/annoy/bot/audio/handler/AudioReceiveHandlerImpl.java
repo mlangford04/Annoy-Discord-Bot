@@ -16,7 +16,7 @@ public class AudioReceiveHandlerImpl implements AudioReceiveHandler {
   private GuildAudioManager guildAudioManager;
   private final List<String> usersToAnnoy;
   private final User callingUser;
-  private static final String DONNIE_1_HOUR_AUDIO_LINK = "https://www.youtube.com/watch?v=0XqDzxPY40A";
+  private static final String DONNIE_1_HOUR_AUDIO_LINK = "https://youtu.be/0XqDzxPY40A";
 
 
   public AudioReceiveHandlerImpl(CommandContext ctx) {
