@@ -13,7 +13,7 @@ public class DonnieBot {
 
   public DonnieBot () throws LoginException {
     JDABuilder.createDefault(
-        Config.get("BOT_TOKEN"),
+        System.getenv("BOT_TOKEN"),
         GatewayIntent.GUILD_MEMBERS,
         GatewayIntent.GUILD_MESSAGES,
         GatewayIntent.GUILD_VOICE_STATES
